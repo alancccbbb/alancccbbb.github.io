@@ -1,0 +1,305 @@
+
+<!DOCTYPE html>
+<html>
+  <head>
+    
+<meta charset="utf-8" >
+
+<title>🚀 使用 Railway 官方模板部署 Tailscale 出口节点 | Lemom笔记</title>
+<meta name="description" content="网络实验、工具探索、记录思考">
+
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/3.7.0/animate.min.css">
+
+<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.2/css/all.css" integrity="sha384-fnmOCqbTlWIlj8LyTjo7mOUStjsKC4pOpQbqyi7RrhN7udi9RwhKkMHpvLbHG9Sr" crossorigin="anonymous">
+<link rel="shortcut icon" href="https://blog.lemom.cn/favicon.ico?v=1745822608403">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.10.0/katex.min.css">
+<link rel="stylesheet" href="https://blog.lemom.cn/styles/main.css">
+
+
+  
+    <link rel="stylesheet" href="https://unpkg.com/gitalk/dist/gitalk.css" />
+  
+
+  
+
+
+<script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+<script src="//cdn.jsdelivr.net/gh/highlightjs/cdn-release@11.5.1/build/highlight.min.js"></script>
+
+
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-CV1974WBV5"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'G-CV1974WBV5');
+</script>
+
+
+  </head>
+  <body>
+    <div id="app" class="main">
+      <div class="site-header-container">
+  <div class="site-header">
+    <div class="left">
+      <a href="https://blog.lemom.cn">
+        <img class="avatar" src="https://blog.lemom.cn/images/avatar.png?v=1745822608403" alt="" width="32px" height="32px">
+      </a>
+      <a href="https://blog.lemom.cn">
+        <h1 class="site-title">Lemom笔记</h1>
+      </a>
+    </div>
+    <div class="right">
+      <transition name="fade">
+        <i class="icon" :class="{ 'icon-close-outline': menuVisible, 'icon-menu-outline': !menuVisible }" @click="menuVisible = !menuVisible"></i>
+      </transition>
+    </div>
+  </div>
+</div>
+
+<transition name="fade">
+  <div class="menu-container" style="display: none;" v-show="menuVisible">
+    <div class="menu-list">
+      
+        
+          <a href="/" class="menu purple-link">
+            首页
+          </a>
+        
+      
+        
+          <a href="/archives" class="menu purple-link">
+            归档
+          </a>
+        
+      
+        
+          <a href="/tags" class="menu purple-link">
+            标签
+          </a>
+        
+      
+        
+          <a href="https://blog.lemom.cn/post/about" class="menu purple-link">
+            关于
+          </a>
+        
+      
+        
+          <a href="https://blog.lemom.cn/post/lian-xi-fang-shi" class="menu purple-link">
+            联系方式
+          </a>
+        
+      
+        
+          <a href="https://blog.lemom.cn/post/testtest" class="menu purple-link">
+            留言反馈
+          </a>
+        
+      
+        
+          <a href="https://blog.lemom.cn/member/" class="menu purple-link">
+            查询Test
+          </a>
+        
+      
+    </div>
+  </div>
+</transition>
+
+
+      <div class="content-container">
+        <div class="post-detail">
+          
+            <div class="feature-container" style="background-image: url('https://blog.lemom.cn/post-images/shi-yong-railway-guan-fang-mo-ban-bu-shu-tailscale-chu-kou-jie-dian.png')">
+            </div>
+          
+          <h2 class="post-title">🚀 使用 Railway 官方模板部署 Tailscale 出口节点</h2>
+          <div class="post-info post-detail-info">
+            <span><i class="icon-calendar-outline"></i> 2025-04-18</span>
+            
+              <span>
+                <i class="icon-pricetags-outline"></i>
+                
+                  <a href="https://blog.lemom.cn/tag/ny6lNeAI4v/">
+                    railway
+                    
+                      ，
+                    
+                  </a>
+                
+                  <a href="https://blog.lemom.cn/tag/15X9ZgPyhL/">
+                    Tailscale
+                    
+                      ，
+                    
+                  </a>
+                
+                  <a href="https://blog.lemom.cn/tag/cvQk_oIk-A/">
+                    网络实验
+                    
+                  </a>
+                
+              </span>
+            
+          </div>
+          <div class="post-content" v-pre>
+            <p>借助 Railway 快速部署 Tailscale 出口节点，可以实现流量转发与异地网络通道接入，为设备提供灵活的网络访问方式。以下是完整的部署流程。</p>
+<hr>
+<h2 id="步骤-1打开-railway-官方模板链接">步骤 1：打开 Railway 官方模板链接</h2>
+<p>点击以下链接进入 Railway 提供的官方模板页面：</p>
+<p>👉 <a href="https://railway.com/template/uIBpGp">https://railway.com/template/uIBpGp</a></p>
+<hr>
+<h2 id="步骤-2登录-railway-并部署项目">步骤 2：登录 Railway 并部署项目</h2>
+<ol>
+<li>打开模板页面后，点击「<strong>Deploy Now</strong>」按钮。</li>
+<li>如果尚未登录 Railway，会提示你使用 GitHub 账号登录。</li>
+<li>登录成功后，系统将要求你填写环境变量 <code>TAILSCALE_AUTHKEY</code>。</li>
+</ol>
+<hr>
+<h2 id="步骤-3生成-tailscale-授权密钥">步骤 3：生成 Tailscale 授权密钥</h2>
+<ol>
+<li>打开 Tailscale 的密钥管理页面：<br>
+👉 <a href="https://login.tailscale.com/admin/settings/keys">https://login.tailscale.com/admin/settings/keys</a></li>
+<li>点击「<strong>Generate auth key</strong>」按钮。</li>
+<li>在弹出的窗口中，勾选：
+<ul>
+<li>✅ Reusable（可重复使用）</li>
+<li>✅ Ephemeral（临时密钥）</li>
+</ul>
+</li>
+<li>点击「Generate key」，复制生成的密钥（以 <code>tskey-</code> 开头）。</li>
+</ol>
+<hr>
+<h2 id="步骤-4填写密钥并部署">步骤 4：填写密钥并部署</h2>
+<ol>
+<li>回到 Railway 的部署页面。</li>
+<li>在 <code>TAILSCALE_AUTHKEY</code> 字段中粘贴刚才复制的密钥。</li>
+<li>点击「<strong>Deploy</strong>」按钮开始部署。</li>
+</ol>
+<p>部署过程一般只需几分钟，完成后将生成一个活跃的 Tailscale 设备。</p>
+<hr>
+<h2 id="步骤-5启用出口节点功能">步骤 5：启用出口节点功能</h2>
+<ol>
+<li>打开 Tailscale 的设备管理页面：<br>
+👉 <a href="https://login.tailscale.com/admin/machines">https://login.tailscale.com/admin/machines</a></li>
+<li>找到刚刚部署的 Railway 设备（通常名称中包含 railway）。</li>
+<li>点击设备右侧的菜单按钮（⋯），选择「<strong>Enable Exit Node</strong>」。</li>
+</ol>
+<hr>
+<h2 id="步骤-6在本地设备上启用出口节点">步骤 6：在本地设备上启用出口节点</h2>
+<ol>
+<li>在电脑或移动设备上安装并登录 Tailscale 客户端。</li>
+<li>打开客户端设置，找到「<strong>Use exit node</strong>」选项。</li>
+<li>选择刚刚部署的 Railway 节点，启用该节点作为网络出口。</li>
+</ol>
+<hr>
+<h2 id="总结">✅ 总结</h2>
+<p>通过 Railway 部署 Tailscale 的网络出口节点，可以为家庭或局域网设备提供稳定、高效、可控的远程网络转发服务。这种方式适用于：</p>
+<ul>
+<li>在异地访问设备时，需要一个中转网络节点；</li>
+<li>不希望在本地额外架设跳转服务；</li>
+<li>希望构建跨设备、跨网络的私密连接方式；</li>
+<li>搭配网络流控工具，实现按需转发或策略流量分配。</li>
+</ul>
+<p>Railway + Tailscale 提供了一种轻量、灵活的网络访问解决方案，非常适合个人或家庭用户使用。</p>
+<hr>
+<h2 id="参考资料">📚 参考资料</h2>
+<ul>
+<li><a href="https://railway.com/template/uIBpGp">Railway Tailscale 模板</a></li>
+<li><a href="https://tailscale.com">Tailscale 官网</a></li>
+<li><a href="https://login.tailscale.com/admin/machines">Tailscale 设备管理页面</a></li>
+<li><a href="https://login.tailscale.com/admin/settings/keys">Tailscale 授权密钥页面</a></li>
+<li><a href="https://tailscale.com/kb/1103/exit-nodes/">Tailscale Exit Node 官方文档</a></li>
+<li><a href="https://github.com/getgridea/gridea">Gridea 博客项目</a></li>
+</ul>
+
+          </div>
+        </div>
+
+        
+          <div class="next-post">
+            <a class="purple-link" href="https://blog.lemom.cn/post/ubuntu-2404-an-zhuang-yu-pei-zhi-tailscale-jiao-cheng/">
+              <h3 class="post-title">
+                下一篇：🛠️ Ubuntu 24.04 安装与配置 Tailscale 教程
+              </h3>
+            </a>
+          </div>
+          
+      </div>
+
+      
+        
+          <div id="gitalk-container"></div>
+        
+
+        
+      
+
+      <div class="site-footer">
+  <div class="slogan">网络实验、工具探索、记录思考</div>
+  <div class="social-container">
+    
+      
+    
+      
+    
+      
+        <a href="https://blog.lemom.cn" target="_blank">
+          <i class="fab fa-weibo"></i>
+        </a>
+      
+    
+      
+    
+      
+    
+  </div>
+  Powered by <a href="https://github.com/getgridea/gridea" target="_blank">Gridea</a> | © 2025 Lemom | <a href="https://blog.lemom.cn">blog.lemom.cn</a> | <a class="rss" href="https://blog.lemom.cn/atom.xml" target="_blank">RSS</a>
+</div>
+
+
+    </div>
+    <script type="application/javascript">
+
+hljs.initHighlightingOnLoad()
+
+var app = new Vue({
+  el: '#app',
+  data: {
+    menuVisible: false,
+  },
+})
+
+</script>
+
+
+
+  
+    <script src="https://unpkg.com/gitalk/dist/gitalk.min.js"></script>
+    <script>
+
+      var gitalk = new Gitalk({
+        clientID: 'Ov23liYCwt8l5Kq8jtRA',
+        clientSecret: 'c903ba588a3c9cc0853640db35140cc1a360550b',
+        repo: 'blog-comments',
+        owner: 'alancccbbb',
+        admin: ['alancccbbb'],
+        id: (location.pathname).substring(0, 49),      // Ensure uniqueness and length less than 50
+        distractionFreeMode: false  // Facebook-like distraction free mode
+      })
+
+      gitalk.render('gitalk-container')
+
+    </script>
+  
+
+  
+
+
+
+
+  </body>
+</html>

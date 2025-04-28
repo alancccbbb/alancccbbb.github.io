@@ -1,0 +1,366 @@
+
+<!DOCTYPE html>
+<html>
+  <head>
+    
+<meta charset="utf-8" >
+
+<title>🚀 Gridea + GitHub Pages 搭建博客完整教程 | Lemom笔记</title>
+<meta name="description" content="网络实验、工具探索、记录思考">
+
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/3.7.0/animate.min.css">
+
+<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.2/css/all.css" integrity="sha384-fnmOCqbTlWIlj8LyTjo7mOUStjsKC4pOpQbqyi7RrhN7udi9RwhKkMHpvLbHG9Sr" crossorigin="anonymous">
+<link rel="shortcut icon" href="https://blog.lemom.cn/favicon.ico?v=1745822608403">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.10.0/katex.min.css">
+<link rel="stylesheet" href="https://blog.lemom.cn/styles/main.css">
+
+
+  
+    <link rel="stylesheet" href="https://unpkg.com/gitalk/dist/gitalk.css" />
+  
+
+  
+
+
+<script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+<script src="//cdn.jsdelivr.net/gh/highlightjs/cdn-release@11.5.1/build/highlight.min.js"></script>
+
+
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-CV1974WBV5"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'G-CV1974WBV5');
+</script>
+
+
+  </head>
+  <body>
+    <div id="app" class="main">
+      <div class="site-header-container">
+  <div class="site-header">
+    <div class="left">
+      <a href="https://blog.lemom.cn">
+        <img class="avatar" src="https://blog.lemom.cn/images/avatar.png?v=1745822608403" alt="" width="32px" height="32px">
+      </a>
+      <a href="https://blog.lemom.cn">
+        <h1 class="site-title">Lemom笔记</h1>
+      </a>
+    </div>
+    <div class="right">
+      <transition name="fade">
+        <i class="icon" :class="{ 'icon-close-outline': menuVisible, 'icon-menu-outline': !menuVisible }" @click="menuVisible = !menuVisible"></i>
+      </transition>
+    </div>
+  </div>
+</div>
+
+<transition name="fade">
+  <div class="menu-container" style="display: none;" v-show="menuVisible">
+    <div class="menu-list">
+      
+        
+          <a href="/" class="menu purple-link">
+            首页
+          </a>
+        
+      
+        
+          <a href="/archives" class="menu purple-link">
+            归档
+          </a>
+        
+      
+        
+          <a href="/tags" class="menu purple-link">
+            标签
+          </a>
+        
+      
+        
+          <a href="https://blog.lemom.cn/post/about" class="menu purple-link">
+            关于
+          </a>
+        
+      
+        
+          <a href="https://blog.lemom.cn/post/lian-xi-fang-shi" class="menu purple-link">
+            联系方式
+          </a>
+        
+      
+        
+          <a href="https://blog.lemom.cn/post/testtest" class="menu purple-link">
+            留言反馈
+          </a>
+        
+      
+        
+          <a href="https://blog.lemom.cn/member/" class="menu purple-link">
+            查询Test
+          </a>
+        
+      
+    </div>
+  </div>
+</transition>
+
+
+      <div class="content-container">
+        <div class="post-detail">
+          
+            <div class="feature-container" style="background-image: url('https://blog.lemom.cn/post-images/gridea-github-pages-da-jian-bo-ke-wan-zheng-jiao-cheng.jpg')">
+            </div>
+          
+          <h2 class="post-title">🚀 Gridea + GitHub Pages 搭建博客完整教程</h2>
+          <div class="post-info post-detail-info">
+            <span><i class="icon-calendar-outline"></i> 2025-04-22</span>
+            
+              <span>
+                <i class="icon-pricetags-outline"></i>
+                
+                  <a href="https://blog.lemom.cn/tag/PZsX2syfHT/">
+                    Gridea
+                    
+                      ，
+                    
+                  </a>
+                
+                  <a href="https://blog.lemom.cn/tag/xsZTI4pmcdb/">
+                    GitHub Pages
+                    
+                      ，
+                    
+                  </a>
+                
+                  <a href="https://blog.lemom.cn/tag/cvQk_oIk-A/">
+                    网络实验
+                    
+                  </a>
+                
+              </span>
+            
+          </div>
+          <div class="post-content" v-pre>
+            <blockquote>
+<p>本教程将手把手教你如何使用 Gridea + GitHub Pages 搭建一个漂亮的静态博客，并配置 Gitalk 评论系统。适合新手快速上手。</p>
+</blockquote>
+<hr>
+<h2 id="一-准备工作">✅ 一、准备工作</h2>
+<ol>
+<li>
+<p><strong>注册并安装 Gridea</strong></p>
+<ul>
+<li>项目下载地址：<a href="https://github.com/getgridea/gridea">https://github.com/getgridea/gridea</a></li>
+<li>支持 Windows / macOS / Linux</li>
+</ul>
+</li>
+<li>
+<p><strong>注册 GitHub 账号</strong></p>
+<ul>
+<li>地址：<a href="https://github.com">https://github.com</a></li>
+<li>用于托管博客页面和评论内容</li>
+</ul>
+</li>
+</ol>
+<hr>
+<h2 id="二-创建-github-仓库">✅ 二、创建 GitHub 仓库</h2>
+<ol>
+<li>
+<p>登录 GitHub，创建一个新的公开仓库：</p>
+<ul>
+<li>仓库名推荐为：<code>yourusername.github.io</code>（如你 GitHub 用户名是 <code>alancccbbb</code>，则仓库名应为 <code>alancccbbb.github.io</code>）</li>
+<li>不勾选 README 和其他初始化选项</li>
+<li>创建完成后记下仓库地址</li>
+</ul>
+</li>
+<li>
+<p>启用 GitHub Pages：</p>
+<ul>
+<li>打开仓库 → Settings → Pages</li>
+<li>Source 选择 <code>master</code> 分支 → <code>/ (root)</code> → 保存</li>
+<li>生成的网址通常是：<code>https://yourusername.github.io</code>（如果自定义域名，可在Custom domain填入域名并在域名做好指向设置）<br>
+<img src="https://blog.lemom.cn/post-images/1745290955829.png" alt="" loading="lazy"></li>
+</ul>
+</li>
+</ol>
+<hr>
+<h2 id="三-gridea-博客设置">✅ 三、Gridea 博客设置</h2>
+<ol>
+<li>打开 Gridea，进入【远程】设置：
+<ul>
+<li>远程类型：GitHub Pages</li>
+<li>域名：<code>https://blog.lemom.cn</code></li>
+<li>仓库名称：alancccbbb.github.io</li>
+<li>分支名称：<code>master</code></li>
+<li>用户名 &amp; 邮箱：填写你的 GitHub 账号信息</li>
+<li>Token：去 GitHub → Settings → Developer settings → Personal access tokens → 生成一个 Token，勾选 <code>repo</code> 权限</li>
+<li>填好保存，点击「初始化远程仓库」<br>
+<img src="https://blog.lemom.cn/post-images/1745292014867.png" alt="" loading="lazy"><br>
+<img src="https://blog.lemom.cn/post-images/1745292162425.png" alt="" loading="lazy"><br>
+<img src="https://blog.lemom.cn/post-images/1745291357765.png" alt="" loading="lazy"></li>
+</ul>
+</li>
+<li>设置博客信息：
+<ul>
+<li>进入【设置】页面，填写博客名称、地址（如 <code>https://blog.lemom.cn</code>）、描述、作者等</li>
+<li>推荐配置 CNAME（见下文）</li>
+</ul>
+</li>
+</ol>
+<hr>
+<h2 id="四-配置自定义域名如-bloglemomcn">✅ 四、配置自定义域名（如 blog.lemom.cn）</h2>
+<ol>
+<li>
+<p>登录你的域名服务商，添加以下 DNS 记录：</p>
+<ul>
+<li>类型：CNAME</li>
+<li>主机记录：<code>blog</code></li>
+<li>记录值：<code>yourusername.github.io</code>（如 <code>alancccbbb.github.io</code>）</li>
+</ul>
+</li>
+<li>
+<p>回到 GitHub 仓库 → <code>Settings → Pages</code>，添加自定义域名 <code>blog.lemom.cn</code>，并勾选「Enforce HTTPS」</p>
+</li>
+<li>
+<p>在 Gridea 的远程-基础设置中<code>CNAME</code> 中填入：blog.lemom.cn</p>
+</li>
+</ol>
+<hr>
+<hr>
+<h2 id="五-配置-gitalk-评论系统">✅ 五、配置 Gitalk 评论系统</h2>
+<h3 id="1-准备工作">1. 🧰 准备工作</h3>
+<p>注册 GitHub 并登录</p>
+<p>新建一个专用于存放评论的仓库，例如命名为：blog-comments</p>
+<h3 id="1-注册-github-oauth-应用">1. 注册 GitHub OAuth 应用</h3>
+<p>首先在Github的个人设置-Develop settings中注册一个OAuth Apps应用，在配置界面根据自己的博客填写相关信息。<br>
+或者直接前往 <a href="https://github.com/settings/applications/new">https://github.com/settings/applications/new</a>：</p>
+<ul>
+<li>Application Name：<code>Gridea Blog</code></li>
+<li>Homepage URL：<code>https://blog.lemom.cn</code></li>
+<li>Authorization Callback URL：<code>https://blog.lemom.cn</code></li>
+</ul>
+<p>完成后会生成：</p>
+<ul>
+<li><code>Client ID</code></li>
+<li><code>Client Secret</code><br>
+<img src="https://blog.lemom.cn/post-images/1745293955028.png" alt="" loading="lazy"></li>
+</ul>
+<h3 id="2-开启-github-仓库-issues">2. 开启 GitHub 仓库 Issues</h3>
+<p>进入博客仓库 → <code>Settings → Features</code> → 勾选 <code>Issues</code><br>
+<img src="https://blog.lemom.cn/post-images/1745294096460.png" alt="" loading="lazy"></p>
+<h3 id="3-配置-gridea-评论系统以-gitalk-为例">3. 配置 Gridea 评论系统（以 Gitalk 为例）</h3>
+<h2 id="gridea中的配置就比较简单了只需要根据刚刚申请的oauth-apps中所填的信息对应填写即可">Gridea中的配置就比较简单了，只需要根据刚刚申请的OAuth Apps中所填的信息对应填写即可。<br>
+<img src="https://blog.lemom.cn/post-images/1745294285743.png" alt="" loading="lazy"></h2>
+<h2 id="注意事项">📌 注意事项</h2>
+<ul>
+<li>
+<p>gridea-comments 仓库必须是公开的，否则 Gitalk 无法访问。</p>
+</li>
+<li>
+<p>仓库必须开启 Issues（进入仓库 → Settings → Features → 勾选 Issues）。</p>
+</li>
+<li>
+<p>博客每篇文章的标题将对应一个 GitHub Issue。</p>
+</li>
+<li>
+<p>Gitalk 会自动按文章 path 或 title 创建 Issue 用于展示评论。</p>
+</li>
+</ul>
+<hr>
+<h2 id="最后一步部署-测试">✅ 最后一步：部署 &amp; 测试</h2>
+<p>写好文章后，点击「同步」部署博客</p>
+<p>访问文章页 → 评论区 → GitHub 登录授权（首次使用需授权一次）</p>
+<p>成功后可留言，评论将记录在 gridea-comments 仓库的 Issues 中</p>
+
+          </div>
+        </div>
+
+        
+          <div class="next-post">
+            <a class="purple-link" href="https://blog.lemom.cn/post/ubuntu-2404-an-zhuang-cloudflared-zheng-que-bu-zou/">
+              <h3 class="post-title">
+                下一篇：Ubuntu 24.04 安装 cloudflared 正确步骤
+              </h3>
+            </a>
+          </div>
+          
+      </div>
+
+      
+        
+          <div id="gitalk-container"></div>
+        
+
+        
+      
+
+      <div class="site-footer">
+  <div class="slogan">网络实验、工具探索、记录思考</div>
+  <div class="social-container">
+    
+      
+    
+      
+    
+      
+        <a href="https://blog.lemom.cn" target="_blank">
+          <i class="fab fa-weibo"></i>
+        </a>
+      
+    
+      
+    
+      
+    
+  </div>
+  Powered by <a href="https://github.com/getgridea/gridea" target="_blank">Gridea</a> | © 2025 Lemom | <a href="https://blog.lemom.cn">blog.lemom.cn</a> | <a class="rss" href="https://blog.lemom.cn/atom.xml" target="_blank">RSS</a>
+</div>
+
+
+    </div>
+    <script type="application/javascript">
+
+hljs.initHighlightingOnLoad()
+
+var app = new Vue({
+  el: '#app',
+  data: {
+    menuVisible: false,
+  },
+})
+
+</script>
+
+
+
+  
+    <script src="https://unpkg.com/gitalk/dist/gitalk.min.js"></script>
+    <script>
+
+      var gitalk = new Gitalk({
+        clientID: 'Ov23liYCwt8l5Kq8jtRA',
+        clientSecret: 'c903ba588a3c9cc0853640db35140cc1a360550b',
+        repo: 'blog-comments',
+        owner: 'alancccbbb',
+        admin: ['alancccbbb'],
+        id: (location.pathname).substring(0, 49),      // Ensure uniqueness and length less than 50
+        distractionFreeMode: false  // Facebook-like distraction free mode
+      })
+
+      gitalk.render('gitalk-container')
+
+    </script>
+  
+
+  
+
+
+
+
+  </body>
+</html>

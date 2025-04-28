@@ -1,0 +1,260 @@
+
+<!DOCTYPE html>
+<html>
+  <head>
+    
+<meta charset="utf-8" >
+
+<title>Ubuntu 24.04 安装 cloudflared 正确步骤 | Lemom笔记</title>
+<meta name="description" content="网络实验、工具探索、记录思考">
+
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/3.7.0/animate.min.css">
+
+<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.2/css/all.css" integrity="sha384-fnmOCqbTlWIlj8LyTjo7mOUStjsKC4pOpQbqyi7RrhN7udi9RwhKkMHpvLbHG9Sr" crossorigin="anonymous">
+<link rel="shortcut icon" href="https://blog.lemom.cn/favicon.ico?v=1745822608403">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.10.0/katex.min.css">
+<link rel="stylesheet" href="https://blog.lemom.cn/styles/main.css">
+
+
+  
+    <link rel="stylesheet" href="https://unpkg.com/gitalk/dist/gitalk.css" />
+  
+
+  
+
+
+<script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+<script src="//cdn.jsdelivr.net/gh/highlightjs/cdn-release@11.5.1/build/highlight.min.js"></script>
+
+
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-CV1974WBV5"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'G-CV1974WBV5');
+</script>
+
+
+  </head>
+  <body>
+    <div id="app" class="main">
+      <div class="site-header-container">
+  <div class="site-header">
+    <div class="left">
+      <a href="https://blog.lemom.cn">
+        <img class="avatar" src="https://blog.lemom.cn/images/avatar.png?v=1745822608403" alt="" width="32px" height="32px">
+      </a>
+      <a href="https://blog.lemom.cn">
+        <h1 class="site-title">Lemom笔记</h1>
+      </a>
+    </div>
+    <div class="right">
+      <transition name="fade">
+        <i class="icon" :class="{ 'icon-close-outline': menuVisible, 'icon-menu-outline': !menuVisible }" @click="menuVisible = !menuVisible"></i>
+      </transition>
+    </div>
+  </div>
+</div>
+
+<transition name="fade">
+  <div class="menu-container" style="display: none;" v-show="menuVisible">
+    <div class="menu-list">
+      
+        
+          <a href="/" class="menu purple-link">
+            首页
+          </a>
+        
+      
+        
+          <a href="/archives" class="menu purple-link">
+            归档
+          </a>
+        
+      
+        
+          <a href="/tags" class="menu purple-link">
+            标签
+          </a>
+        
+      
+        
+          <a href="https://blog.lemom.cn/post/about" class="menu purple-link">
+            关于
+          </a>
+        
+      
+        
+          <a href="https://blog.lemom.cn/post/lian-xi-fang-shi" class="menu purple-link">
+            联系方式
+          </a>
+        
+      
+        
+          <a href="https://blog.lemom.cn/post/testtest" class="menu purple-link">
+            留言反馈
+          </a>
+        
+      
+        
+          <a href="https://blog.lemom.cn/member/" class="menu purple-link">
+            查询Test
+          </a>
+        
+      
+    </div>
+  </div>
+</transition>
+
+
+      <div class="content-container">
+        <div class="post-detail">
+          
+            <div class="feature-container" style="background-image: url('https://blog.lemom.cn/post-images/ubuntu-2404-an-zhuang-cloudflared-zheng-que-bu-zou.png')">
+            </div>
+          
+          <h2 class="post-title">Ubuntu 24.04 安装 cloudflared 正确步骤</h2>
+          <div class="post-info post-detail-info">
+            <span><i class="icon-calendar-outline"></i> 2025-04-21</span>
+            
+              <span>
+                <i class="icon-pricetags-outline"></i>
+                
+                  <a href="https://blog.lemom.cn/tag/Sxb1hqIoTb/">
+                    Cloudflared
+                    
+                      ，
+                    
+                  </a>
+                
+                  <a href="https://blog.lemom.cn/tag/yHcpkl-fRG/">
+                    Ubuntu
+                    
+                  </a>
+                
+              </span>
+            
+          </div>
+          <div class="post-content" v-pre>
+            <p>Cloudflare 提供的 <code>cloudflared</code> 工具可以帮助我们建立 Zero Trust 隧道，或作为代理出口工具配合 Tailscale/OpenClash 使用。然而，在 Ubuntu 24.04 上安装时，官方尚未提供专门的源，我们可以兼容性地使用 Ubuntu 22.04（Jammy）的软件源进行安装。本文将详细介绍如何在 Ubuntu 24.04 系统中正确安装 <code>cloudflared</code>。</p>
+<hr>
+<h2 id="安装步骤">📦 安装步骤</h2>
+<h3 id="1️⃣-添加-cloudflare-gpg-密钥">1️⃣ 添加 Cloudflare GPG 密钥</h3>
+<pre><code class="language-bash">sudo mkdir -p /etc/apt/keyrings
+curl -fsSL https://pkg.cloudflare.com/cloudflare-main.gpg | sudo tee /etc/apt/keyrings/cloudflare-main.gpg &gt; /dev/null
+</code></pre>
+<hr>
+<h3 id="2️⃣-添加软件源使用-jammy-版本">2️⃣ 添加软件源（使用 jammy 版本）</h3>
+<p>虽然我们是 Ubuntu 24.04 系统，但可以安全使用 Ubuntu 22.04 的软件源：</p>
+<pre><code class="language-bash">echo &quot;deb [signed-by=/etc/apt/keyrings/cloudflare-main.gpg] https://pkg.cloudflare.com/cloudflared jammy main&quot; | sudo tee /etc/apt/sources.list.d/cloudflared.list
+</code></pre>
+<hr>
+<h3 id="3️⃣-更新软件列表">3️⃣ 更新软件列表</h3>
+<pre><code class="language-bash">sudo apt update
+</code></pre>
+<hr>
+<h3 id="4️⃣-安装-cloudflared">4️⃣ 安装 cloudflared</h3>
+<pre><code class="language-bash">sudo apt install cloudflared
+</code></pre>
+<hr>
+<h3 id="验证是否安装成功">✅ 验证是否安装成功</h3>
+<pre><code class="language-bash">cloudflared --version
+</code></pre>
+<p>输出应该类似：</p>
+<pre><code class="language-bash">cloudflared version 2024.4.0 (built 2024-04-10-1449 UTC)
+</code></pre>
+<hr>
+<h3 id="️连接已在cloudflare设置好的隧道改成自己的隧道密匙">⚡️连接已在CloudFlare设置好的隧道(改成自己的隧道密匙）：</h3>
+<pre><code class="language-bash">sudo cloudflared service install eyJhIfdsfdsfdsfdsfc4YmU0NjJjYTk3MzfdsfdsffsfMDIfsdfsffsfiNzMtMDAyYWrteDVjNGI2IiwicyI6IllUTmhOVEExTkRFdE0yTmretnMfsdfGN0TVfsfsfsdfdsfs
+</code></pre>
+
+          </div>
+        </div>
+
+        
+          <div class="next-post">
+            <a class="purple-link" href="https://blog.lemom.cn/post/shi-yong-railway-guan-fang-mo-ban-bu-shu-tailscale-chu-kou-jie-dian/">
+              <h3 class="post-title">
+                下一篇：🚀 使用 Railway 官方模板部署 Tailscale 出口节点
+              </h3>
+            </a>
+          </div>
+          
+      </div>
+
+      
+        
+          <div id="gitalk-container"></div>
+        
+
+        
+      
+
+      <div class="site-footer">
+  <div class="slogan">网络实验、工具探索、记录思考</div>
+  <div class="social-container">
+    
+      
+    
+      
+    
+      
+        <a href="https://blog.lemom.cn" target="_blank">
+          <i class="fab fa-weibo"></i>
+        </a>
+      
+    
+      
+    
+      
+    
+  </div>
+  Powered by <a href="https://github.com/getgridea/gridea" target="_blank">Gridea</a> | © 2025 Lemom | <a href="https://blog.lemom.cn">blog.lemom.cn</a> | <a class="rss" href="https://blog.lemom.cn/atom.xml" target="_blank">RSS</a>
+</div>
+
+
+    </div>
+    <script type="application/javascript">
+
+hljs.initHighlightingOnLoad()
+
+var app = new Vue({
+  el: '#app',
+  data: {
+    menuVisible: false,
+  },
+})
+
+</script>
+
+
+
+  
+    <script src="https://unpkg.com/gitalk/dist/gitalk.min.js"></script>
+    <script>
+
+      var gitalk = new Gitalk({
+        clientID: 'Ov23liYCwt8l5Kq8jtRA',
+        clientSecret: 'c903ba588a3c9cc0853640db35140cc1a360550b',
+        repo: 'blog-comments',
+        owner: 'alancccbbb',
+        admin: ['alancccbbb'],
+        id: (location.pathname).substring(0, 49),      // Ensure uniqueness and length less than 50
+        distractionFreeMode: false  // Facebook-like distraction free mode
+      })
+
+      gitalk.render('gitalk-container')
+
+    </script>
+  
+
+  
+
+
+
+
+  </body>
+</html>
